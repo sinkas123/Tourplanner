@@ -7,6 +7,7 @@ import com.example.jpademo.persistence.repositories.PersonRepository;
 import com.example.jpademo.service.mapper.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonMapper personMapper;
 
+   @Transactional
     @Override
     public void saveNewPerson(PersonDto personDto) {
         PersonEntity entity = PersonEntity.builder()

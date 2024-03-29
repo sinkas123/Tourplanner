@@ -19,7 +19,6 @@ public class JpaDemoApplication {
     }
 
 
-
     void initFakeData() {
         PersonEntity p = PersonEntity.builder()
                 .name("Markus")

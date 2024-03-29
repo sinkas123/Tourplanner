@@ -4,6 +4,7 @@ import com.example.jpademo.persistence.entities.AddressEntity;
 import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.repositories.AddressRepository;
 import com.example.jpademo.persistence.repositories.PersonRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 
 @SpringBootTest
 @Transactional
@@ -25,6 +27,14 @@ class JpaDemoApplicationTests {
     void contextLoads() {
     }
 
+   /* @BeforeEach
+    public void cleanUp() {
+        addressRepository.deleteAllInBatch();
+        personRepository.deleteAllInBatch();
+    }*/
+
+// ... your test methods ...
+
     @Test
     void test_AddressEntity() {
         AddressEntity a = AddressEntity.builder()
@@ -34,6 +44,14 @@ class JpaDemoApplicationTests {
                 .build();
         System.out.println(addressRepository.count() + " rows.");
         addressRepository.save(a);
+        System.out.println(addressRepository.count() + " rows.");
+        AddressEntity b = AddressEntity.builder()
+                .postcode(1010)
+                .city("Wien")
+                .street("Kellergasse")
+                .build();
+        System.out.println(addressRepository.count() + " rows.");
+        addressRepository.save(b);
         System.out.println(addressRepository.count() + " rows.");
     }
 
@@ -76,13 +94,13 @@ class JpaDemoApplicationTests {
                 .street("Kellergasse")
                 .person(anna)
                 .build());
-        /*
-        Collection<AddressEntity> addresses = new ArrayList<>();
+
+       /* Collection<AddressEntity> addresses = new ArrayList<>();
         addresses.add(graben);
         addresses.add(kellergasse);
         anna.setAddresses(addresses);
-         */
 
+*/
         personRepository.findAll().forEach(System.out::println);
 
         addressRepository.findAll().forEach(a -> {
@@ -93,5 +111,6 @@ class JpaDemoApplicationTests {
         System.out.println("find addresses by person:");
         addressRepository.findByPerson(anna).forEach(System.out::println);
     }
+
 
 }
