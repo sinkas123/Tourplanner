@@ -23,6 +23,16 @@ public class TourServiceImpl implements TourService {
         this.tourRepository = tourRepository;
         this.tourMapper = tourMapper;
     }
+    public TourDto saveTour(TourDto tourDto) {
+        // Map DTO to Entity
+        TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
+
+        // Save Entity
+        TourEntity savedEntity = tourRepository.save(tourEntity);
+
+        // Map saved Entity back to DTO
+        return tourMapper.mapToDto(savedEntity);
+    }
 
     @Override
     @Transactional(readOnly = true)
