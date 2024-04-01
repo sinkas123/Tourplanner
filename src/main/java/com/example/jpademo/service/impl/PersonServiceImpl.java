@@ -14,12 +14,16 @@ import java.util.List;
 @Component
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
-    private PersonRepository personRepository;
-    @Autowired
-    private PersonMapper personMapper;
+    private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
-   @Transactional
+
+    public PersonServiceImpl(PersonRepository personRepository, PersonMapper personMapper) {
+        this.personRepository = personRepository;
+        this.personMapper = personMapper;
+    }
+
+    @Transactional
     @Override
     public void saveNewPerson(PersonDto personDto) {
         PersonEntity entity = PersonEntity.builder()

@@ -5,10 +5,10 @@ import com.example.jpademo.persistence.entities.TourEntity;
 import com.example.jpademo.service.dtos.PersonDto;
 import com.example.jpademo.service.dtos.TourDto;
 import lombok.Builder;
+import org.springframework.stereotype.Component;
 
 
-@Builder
-
+@Component
 public class TourMapper extends AbstractMapper<TourEntity, TourDto> {
 
     @Override

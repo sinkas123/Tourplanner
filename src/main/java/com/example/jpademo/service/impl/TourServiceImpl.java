@@ -5,6 +5,8 @@ import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourDto;
 import com.example.jpademo.service.mapper.TourMapper;
 import com.example.jpademo.service.mapper.TourService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +18,13 @@ import java.util.stream.Collectors;
 public class TourServiceImpl implements TourService {
 
     private final TourRepository tourRepository;
-    private TourMapper tourMapper;
+    private final TourMapper tourMapper;
 
-    @Autowired
     public TourServiceImpl(TourRepository tourRepository, TourMapper tourMapper) {
         this.tourRepository = tourRepository;
         this.tourMapper = tourMapper;
     }
+
     public TourDto saveTour(TourDto tourDto) {
         // Map DTO to Entity
         TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
@@ -43,7 +45,7 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public TourDto findTourById(Long id) {
         return tourRepository.findById(id)
                 .map(tourMapper::mapToDto)
@@ -75,5 +77,4 @@ public class TourServiceImpl implements TourService {
     public void deleteTour(Long id) {
         tourRepository.deleteById(id);
     }
-
 }
