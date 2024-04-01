@@ -1,0 +1,53 @@
+@startuml
+class PersonEntity
+class PersonMapper{
+PersonDto mapToDto(PersonEntity source)
+}
+interface PersonRepository{
+List<PersonEntity> findByNameIgnoreCase(String name)
+}
+interface TourRepository{
+List<TourEntity> findByStartLocation(String startLocation)
+List<TourEntity> findByNameContainingIgnoreCase(String name)
+List<TourEntity> findByTransportType(String transportType)
+}
+class PersonApi
+class TourApi
+class PersonDto{
+- id: Long
+- name: String
+- email: String
+- age: int
+}
+class TourDto
+interface PersonService{
+void saveNewPerson()
+List<PersonDto> getAllPersons()
+List<PersonDto> getPersonByName()
+}
+interface TourService{
+}
+class PersonServiceImpl
+class TourServiceImpl
+class PersonMapper
+class TourMapper{
+
+}
+
+PersonApi--PersonService
+PersonService^--PersonServiceImpl
+PersonServiceImpl--PersonRepository
+PersonRepository--PersonEntity
+PersonServiceImpl--PersonMapper
+PersonMapper--PersonDto
+PersonMapper--PersonEntity
+
+TourApi--TourService
+TourService^--TourServiceImpl
+TourServiceImpl--TourRepository
+TourRepository--TourEntity
+TourServiceImpl--TourMapper
+TourMapper--TourDto
+
+
+@enduml
