@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping(path = "person")
 public class PersonApi {
 
+    private final PersonService personService;
+
     @Autowired
-    private PersonService personService;
+    public PersonApi(PersonService personService) {
+        this.personService = personService;
+    }
 
     @GetMapping
     public List<PersonDto> getAllPersons() {

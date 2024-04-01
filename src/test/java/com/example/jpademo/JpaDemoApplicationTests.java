@@ -103,10 +103,7 @@ class JpaDemoApplicationTests {
 */
         personRepository.findAll().forEach(System.out::println);
 
-        addressRepository.findAll().forEach(a -> {
-            System.out.println(a);
-            //System.out.println(a.getPerson().getName());
-        });
+        addressRepository.findAll().forEach(System.out::println);
 
         System.out.println("find addresses by person:");
         addressRepository.findByPerson(anna).forEach(System.out::println);
