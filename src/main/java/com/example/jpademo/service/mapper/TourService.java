@@ -17,5 +17,4 @@ public interface TourService {
 
     void deleteTour(Long id);
 
-    TourDto saveTour(TourDto tourDto);
 }

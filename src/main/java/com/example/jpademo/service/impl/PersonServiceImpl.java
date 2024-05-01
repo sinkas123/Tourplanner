@@ -5,7 +5,6 @@ import com.example.jpademo.service.dtos.PersonDto;
 import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.repositories.PersonRepository;
 import com.example.jpademo.service.mapper.PersonMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

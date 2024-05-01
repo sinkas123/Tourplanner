@@ -3,9 +3,6 @@ package com.example.jpademo.persistence.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 @Entity
 @Table(name = "PERSON")
 @Data

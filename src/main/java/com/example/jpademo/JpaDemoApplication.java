@@ -2,17 +2,23 @@ package com.example.jpademo;
 
 import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.repositories.PersonRepository;
-import jakarta.annotation.PostConstruct;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
 public class JpaDemoApplication {
 
+    private static final Log logger = LogFactory.getLog(JpaDemoApplication.class);
+
+    private final PersonRepository personRepository;
+
     @Autowired
-    private PersonRepository personRepository;
+    public JpaDemoApplication(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(JpaDemoApplication.class, args);
@@ -34,8 +40,8 @@ public class JpaDemoApplication {
                 .email("anna@technikum-wien.at")
                 .build());
 
-        System.out.printf("%d rows in table person\n", personRepository.count());
-        personRepository.findAll().forEach(System.out::println);
+        logger.info(String.format("%d rows in table person%n", personRepository.count()));
+        personRepository.findAll().forEach(logger::info);
     }
 
 }
