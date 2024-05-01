@@ -1,14 +1,12 @@
 package com.example.jpademo.service.impl;
 
+import com.example.jpademo.exception.ResourceNotFoundException;
 import com.example.jpademo.persistence.entities.TourEntity;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourDto;
 import com.example.jpademo.service.mapper.TourMapper;
 import com.example.jpademo.service.mapper.TourService;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,23 +23,12 @@ public class TourServiceImpl implements TourService {
         this.tourMapper = tourMapper;
     }
 
-    public TourDto saveTour(TourDto tourDto) {
-        // Map DTO to Entity
-        TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
-
-        // Save Entity
-        TourEntity savedEntity = tourRepository.save(tourEntity);
-
-        // Map saved Entity back to DTO
-        return tourMapper.mapToDto(savedEntity);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public List<TourDto> findAllTours() {
         return tourRepository.findAll().stream()
                 .map(tourMapper::mapToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -64,7 +51,7 @@ public class TourServiceImpl implements TourService {
     @Transactional
     public TourDto updateTour(Long id, TourDto tourDto) {
         if (!tourRepository.existsById(id)) {
-            throw new RuntimeException("Tour not found with id: " + id);
+            throw new ResourceNotFoundException("Tour not found with id: " + id);
         }
         TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
         tourEntity.setId(id);

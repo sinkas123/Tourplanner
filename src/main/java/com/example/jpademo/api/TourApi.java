@@ -33,7 +33,7 @@ public class TourApi {
 
     @PostMapping
     public ResponseEntity<TourDto> createTour(@RequestBody TourDto tourDto) {
-        TourDto savedTour = tourService.saveTour(tourDto);
+        TourDto savedTour = tourService.createTour(tourDto);
         return ResponseEntity.ok(savedTour);
     }
 
