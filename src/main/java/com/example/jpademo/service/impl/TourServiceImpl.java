@@ -5,15 +5,14 @@ import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourDto;
 import com.example.jpademo.service.mapper.TourMapper;
 import com.example.jpademo.service.mapper.TourService;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class TourServiceImpl implements TourService {
 
@@ -57,6 +56,7 @@ public class TourServiceImpl implements TourService {
     public TourDto createTour(TourDto tourDto) {
         TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
         TourEntity savedEntity = tourRepository.save(tourEntity);
+        log.info("createdTour: {}", savedEntity);
         return tourMapper.mapToDto(savedEntity);
     }
 
@@ -69,6 +69,7 @@ public class TourServiceImpl implements TourService {
         TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
         tourEntity.setId(id);
         TourEntity updatedEntity = tourRepository.save(tourEntity);
+        log.info("updatedTour: #{} to {}", id, updatedEntity);
         return tourMapper.mapToDto(updatedEntity);
     }
 
@@ -76,5 +77,6 @@ public class TourServiceImpl implements TourService {
     @Transactional
     public void deleteTour(Long id) {
         tourRepository.deleteById(id);
+        log.info("deletedTour: {}", id);
     }
 }

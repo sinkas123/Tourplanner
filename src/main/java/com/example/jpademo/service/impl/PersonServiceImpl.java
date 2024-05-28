@@ -5,12 +5,13 @@ import com.example.jpademo.service.dtos.PersonDto;
 import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.repositories.PersonRepository;
 import com.example.jpademo.service.mapper.PersonMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Component
 public class PersonServiceImpl implements PersonService {
 
@@ -32,6 +33,7 @@ public class PersonServiceImpl implements PersonService {
                 .age(personDto.getAge())
                 .build();
         personRepository.save(entity);
+        log.info("createdPerson: {}", entity);
     }
 
     @Override
