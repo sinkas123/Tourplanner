@@ -1,7 +1,48 @@
 import './App.css';
-import axios from 'axios';
-import React from "react";
+import React, { useState } from "react";
+import TourForm from "./TourForm";
 
+const App = () => {
+    const [tours, setTours] = useState([]);
+
+    const handleCreateTour = (newTour) => {
+        setTours([...tours, newTour]);
+    };
+
+    return (
+        <div>
+            <h1>Create a New Tour</h1>
+            <TourForm onCreateTour={handleCreateTour} />
+            <h2>All Tours</h2>
+            <ul>
+                {tours.map((tour, index) => (
+                    <li key={index}>
+                        <h3>{tour.name}</h3>
+                        <p>{tour.description}</p>
+                        <div>
+                            <h4>From:</h4>
+                            <p>Country: {tour.from.country}</p>
+                            <p>Postal Number: {tour.from.postalNumber}</p>
+                            <p>Street: {tour.from.street}</p>
+                        </div>
+                        <div>
+                            <h4>To:</h4>
+                            <p>Country: {tour.to.country}</p>
+                            <p>Postal Number: {tour.to.postalNumber}</p>
+                            <p>Street: {tour.to.street}</p>
+                        </div>
+                        <p>Transport Type: {tour.transportType}</p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default App;
+
+
+/*
 function CreateUser() {
 // Function to handle the button click
 const handleButtonClick = () => {
@@ -31,3 +72,6 @@ const handleButtonClick = () => {
 }
 
 export default CreateUser;
+*/
+
+

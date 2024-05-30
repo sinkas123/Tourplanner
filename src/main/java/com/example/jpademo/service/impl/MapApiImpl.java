@@ -53,10 +53,10 @@ public class MapApiImpl implements MapApi {
             }
 
             JSONObject properties = features.getJSONObject(0).getJSONObject("properties");
-            JSONObject summary = properties.getJSONObject("summary");
-
-            double distance = summary.getDouble("distance");
-            double seconds = summary.getDouble("duration");
+            JSONArray segments = properties.getJSONArray("segments");
+            JSONObject firstSegment = segments.getJSONObject(0);
+            double distance = firstSegment.getDouble("distance");
+            double seconds = firstSegment.getDouble("duration");
 
             long wholeMinutes = (long) (seconds / 60);
             Duration duration = Duration.ofMinutes(wholeMinutes);
