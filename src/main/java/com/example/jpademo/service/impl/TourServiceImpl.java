@@ -1,5 +1,6 @@
 package com.example.jpademo.service.impl;
 
+import com.example.jpademo.api.MapApi;
 import com.example.jpademo.persistence.entities.TourEntity;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourDto;
@@ -18,22 +19,44 @@ public class TourServiceImpl implements TourService {
 
     private final TourRepository tourRepository;
     private final TourMapper tourMapper;
+    private final MapApiImpl mapApiImpl;
 
-    public TourServiceImpl(TourRepository tourRepository, TourMapper tourMapper) {
+    public TourServiceImpl(TourRepository tourRepository, TourMapper tourMapper, MapApiImpl mapApiImpl) {
         this.tourRepository = tourRepository;
         this.tourMapper = tourMapper;
+        this.mapApiImpl = mapApiImpl;
     }
 
     public TourDto saveTour(TourDto tourDto) {
         // Map DTO to Entity
         TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
 
+        //search tour information via OpenMapAPI
+        tourEntity = mapApiImpl.searchTourInformation(tourEntity);
+
         // Save Entity
         TourEntity savedEntity = tourRepository.save(tourEntity);
+
+        log.info("createdTour: {}", savedEntity);
 
         // Map saved Entity back to DTO
         return tourMapper.mapToDto(savedEntity);
     }
+
+    /*
+    @Override
+    @Transactional
+    public TourDto createTour(TourDto tourDto) {
+        TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
+
+        MapApiImpl mapApiImpl = new MapApiImpl();
+        tourEntity = mapApiImpl.searchTourInformation(tourEntity);
+
+        TourEntity savedEntity = tourRepository.save(tourEntity);
+        log.info("createdTour: {}", savedEntity);
+        return tourMapper.mapToDto(savedEntity);
+    }
+    */
 
     @Override
     @Transactional(readOnly = true)
@@ -51,14 +74,6 @@ public class TourServiceImpl implements TourService {
                 .orElseThrow(() -> new RuntimeException("Tour not found with id: " + id));
     }
 
-    @Override
-    @Transactional
-    public TourDto createTour(TourDto tourDto) {
-        TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
-        TourEntity savedEntity = tourRepository.save(tourEntity);
-        log.info("createdTour: {}", savedEntity);
-        return tourMapper.mapToDto(savedEntity);
-    }
 
     @Override
     @Transactional

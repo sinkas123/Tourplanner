@@ -4,14 +4,12 @@ import com.example.jpademo.persistence.entities.AddressEntity;
 import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.repositories.AddressRepository;
 import com.example.jpademo.persistence.repositories.PersonRepository;
-import com.example.jpademo.service.MapApi;
+import com.example.jpademo.api.MapApi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 

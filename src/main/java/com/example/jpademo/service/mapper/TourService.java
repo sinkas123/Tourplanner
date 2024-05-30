@@ -11,7 +11,7 @@ public interface TourService {
 
     TourDto findTourById(Long id);
 
-    TourDto createTour(TourDto tourDto);
+    //TourDto createTour(TourDto tourDto);
 
     TourDto updateTour(Long id, TourDto tourDto);
 
