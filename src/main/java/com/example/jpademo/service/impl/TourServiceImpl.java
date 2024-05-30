@@ -43,21 +43,6 @@ public class TourServiceImpl implements TourService {
         return tourMapper.mapToDto(savedEntity);
     }
 
-    /*
-    @Override
-    @Transactional
-    public TourDto createTour(TourDto tourDto) {
-        TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
-
-        MapApiImpl mapApiImpl = new MapApiImpl();
-        tourEntity = mapApiImpl.searchTourInformation(tourEntity);
-
-        TourEntity savedEntity = tourRepository.save(tourEntity);
-        log.info("createdTour: {}", savedEntity);
-        return tourMapper.mapToDto(savedEntity);
-    }
-    */
-
     @Override
     @Transactional(readOnly = true)
     public List<TourDto> findAllTours() {

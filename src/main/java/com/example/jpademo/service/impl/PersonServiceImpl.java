@@ -26,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional
     @Override
-    public void saveNewPerson(PersonDto personDto) {
+    public void savePerson(PersonDto personDto) {
         PersonEntity entity = PersonEntity.builder()
                 .name(personDto.getName())
                 .email(personDto.getEmail())

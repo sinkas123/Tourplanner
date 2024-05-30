@@ -29,7 +29,7 @@ public class PersonApi {
 
     @PostMapping
     public void insertNewPerson(@RequestBody PersonDto person) {
-        personService.saveNewPerson(person);
+        personService.savePerson(person);
     }
 
 }
