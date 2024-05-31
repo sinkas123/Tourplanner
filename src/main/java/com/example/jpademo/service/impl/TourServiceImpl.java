@@ -1,6 +1,5 @@
 package com.example.jpademo.service.impl;
 
-import com.example.jpademo.api.MapApi;
 import com.example.jpademo.persistence.entities.TourEntity;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourDto;

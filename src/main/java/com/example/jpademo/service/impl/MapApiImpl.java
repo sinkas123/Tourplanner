@@ -35,9 +35,7 @@ public class MapApiImpl implements MapApi {
         String start = this.searchAddress(tourEntity.getStartLocation());
         String end = this.searchAddress(tourEntity.getEndLocation());
 
-        //String[] profiles = {"driving-car", "cycling-regular", "foot-walking"};
         String profile = tourEntity.getTransportType();
-        //String profile = profiles[2];
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(
                 "https://api.openrouteservice.org/v2/directions/" + profile + "?api_key=" + API_KEY + "&start=" + start + "&end=" + end,
@@ -53,10 +51,10 @@ public class MapApiImpl implements MapApi {
             }
 
             JSONObject properties = features.getJSONObject(0).getJSONObject("properties");
-            JSONObject summary = properties.getJSONObject("summary");
-
-            double distance = summary.getDouble("distance");
-            double seconds = summary.getDouble("duration");
+            JSONArray segments = properties.getJSONArray("segments");
+            JSONObject firstSegment = segments.getJSONObject(0);
+            double distance = firstSegment.getDouble("distance");
+            double seconds = firstSegment.getDouble("duration");
 
             long wholeMinutes = (long) (seconds / 60);
             Duration duration = Duration.ofMinutes(wholeMinutes);

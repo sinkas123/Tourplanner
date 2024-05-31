@@ -20,7 +20,6 @@ public interface MapApi {
 
     List<double[]> searchDirection(String start, String end);
 
-
     void getMap();
 
 }
