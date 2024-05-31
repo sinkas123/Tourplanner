@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const TourDetails = ({ tour, onDelete }) => {
+const TourDetails = ({ tour, onDelete, onEdit }) => {
     if (!tour) {
         return <div>Select a tour to see the details</div>;
     }
@@ -9,7 +9,7 @@ const TourDetails = ({ tour, onDelete }) => {
     const onDeleteTour = async () => {
         try {
             await axios.delete(`/tour/id/${tour.id}`);
-            onDelete(tour.id); // Notify parent component
+            onDelete(tour.id);
         } catch (error) {
             console.error("Error deleting the tour", error);
         }
@@ -32,7 +32,14 @@ const TourDetails = ({ tour, onDelete }) => {
             <p>Distance: {tour.tourDistance} m</p>
             <p>Estimated Time: {tour.estimatedTime} minutes</p>
             <br/>
+            <button onClick={onEdit}>Update Tour</button>
+            <br/>
             <button onClick={onDeleteTour}>Delete Tour</button>
+            <br/>
+            <button>Placeholder Create Tour-Report</button>
+            <br/>
+            <button>Placeholder Create Summarize-Report</button>
+
         </div>
     );
 };
