@@ -11,11 +11,10 @@ public interface TourService {
 
     TourDto findTourById(Long id);
 
-    TourDto createTour(TourDto tourDto);
+    TourDto saveTour(TourDto tourDto);
 
     TourDto updateTour(Long id, TourDto tourDto);
 
     void deleteTour(Long id);
 
-    TourDto saveTour(TourDto tourDto);
 }

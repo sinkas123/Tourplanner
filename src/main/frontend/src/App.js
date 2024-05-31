@@ -1,33 +1,82 @@
 import './App.css';
-import axios from 'axios';
-import React from "react";
+import React, { useState } from "react";
+import TourForm from "./components/TourForm";
+import TourList from "./components/TourList";
+import TourDetails from "./components/TourDetails";
+import TourUpdate from "./components/TourUpdate";
 
-function CreateUser() {
-// Function to handle the button click
-const handleButtonClick = () => {
-  // Hard-coded test data
-  const testData = {
-    name: 'Test User',
-    email: 'testuser@example.com',
-    age: 22
-  };
+const App = () => {
+    const [tours, setTours] = useState([]);
+    const [selectedTour, setSelectedTour] = useState(null);
+    const [selectedTourId, setSelectedTourId] = useState(null);
+    const [creatingTour, setCreatingTour] = useState(false);
+    const [editingTour, setEditingTour] = useState(false);
 
-  // Send a POST request to the backend
-  axios.post('/person', testData)
-      .then(response => {
-        console.log('Data sent successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('Error sending data:', error);
-      });
+    const handleCreateTour = (newTour) => {
+        setTours([...tours, newTour]);
+        setCreatingTour(false);
+    };
+
+    const handleSelectTour = (tour) => {
+        setSelectedTour(tour);
+        setSelectedTourId(tour.id);
+        setCreatingTour(false);
+    };
+
+    const handleCreateButtonClick = () => {
+        setSelectedTour(null);
+        setSelectedTourId(null);
+        setCreatingTour(true);
+    };
+
+    const handleDeleteTour = (tourId) => {
+        setTours(tours.filter(tour => tour.id !== tourId));
+        setSelectedTour(null);
+        setSelectedTourId(null);
+    };
+
+    const handleEditTour = () => {
+        setEditingTour(true);
+    };
+
+    const handleUpdateTour = (updatedTour) => {
+        setTours(tours.map(tour => (tour.id === updatedTour.id ? updatedTour : tour)));
+        setSelectedTour(updatedTour);
+        setEditingTour(false);
+    };
+
+    const handleCancelUpdate = () => {
+        setEditingTour(false);
+    };
+
+    let displayComponent;
+    if (creatingTour) {
+        displayComponent = <TourForm onCreateTour={handleCreateTour} />;
+    } else if (editingTour) {
+        displayComponent = <TourUpdate tour={selectedTour} onUpdateTour={handleUpdateTour} onCancel={handleCancelUpdate} />;
+    }
+    else if (selectedTour) {
+        displayComponent = <TourDetails tour={selectedTour} onDelete={() => handleDeleteTour(selectedTour.id)} onEdit={handleEditTour} />;
+    }
+
+    return (
+        <div>
+            <h1>Tourplanner</h1>
+            <div className="app-container">
+                <div className="tour-list">
+                    <TourList
+                        tours={tours}
+                        selectedTourId={selectedTourId}
+                        onSelectTour={handleSelectTour}
+                        onCreateTour={handleCreateButtonClick}
+                    />
+                </div>
+                <div className="display-component">
+                    {displayComponent}
+                </div>
+            </div>
+        </div>
+    );
 };
 
-  return (
-      <div>
-        <h1>Button creates user</h1>
-        <button onClick={handleButtonClick}>Create User</button>
-      </div>
-  )
-}
-
-export default CreateUser;
+export default App;

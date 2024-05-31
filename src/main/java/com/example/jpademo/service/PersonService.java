@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PersonService {
 
-    void saveNewPerson(PersonDto personDto);
+    void savePerson(PersonDto personDto);
     List<PersonDto> getAllPersons();
     List<PersonDto> getPersonByName(String name);
 }
