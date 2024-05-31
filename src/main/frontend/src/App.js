@@ -1,9 +1,9 @@
 import './App.css';
 import React, { useState } from "react";
-import TourForm from "./TourForm";
-import TourList from "./TourList";
-import TourDetails from "./TourDetails";
-import TourUpdate from "./TourUpdate";
+import TourForm from "./components/TourForm";
+import TourList from "./components/TourList";
+import TourDetails from "./components/TourDetails";
+import TourUpdate from "./components/TourUpdate";
 
 const App = () => {
     const [tours, setTours] = useState([]);
