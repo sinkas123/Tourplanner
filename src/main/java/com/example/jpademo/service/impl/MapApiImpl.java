@@ -35,9 +35,7 @@ public class MapApiImpl implements MapApi {
         String start = this.searchAddress(tourEntity.getStartLocation());
         String end = this.searchAddress(tourEntity.getEndLocation());
 
-        //String[] profiles = {"driving-car", "cycling-regular", "foot-walking"};
         String profile = tourEntity.getTransportType();
-        //String profile = profiles[2];
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(
                 "https://api.openrouteservice.org/v2/directions/" + profile + "?api_key=" + API_KEY + "&start=" + start + "&end=" + end,
