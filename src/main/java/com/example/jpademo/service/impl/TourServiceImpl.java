@@ -1,6 +1,5 @@
 package com.example.jpademo.service.impl;
 
-import com.example.jpademo.api.MapApi;
 import com.example.jpademo.persistence.entities.TourEntity;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourDto;
@@ -42,21 +41,6 @@ public class TourServiceImpl implements TourService {
         // Map saved Entity back to DTO
         return tourMapper.mapToDto(savedEntity);
     }
-
-    /*
-    @Override
-    @Transactional
-    public TourDto createTour(TourDto tourDto) {
-        TourEntity tourEntity = tourMapper.mapToEntity(tourDto);
-
-        MapApiImpl mapApiImpl = new MapApiImpl();
-        tourEntity = mapApiImpl.searchTourInformation(tourEntity);
-
-        TourEntity savedEntity = tourRepository.save(tourEntity);
-        log.info("createdTour: {}", savedEntity);
-        return tourMapper.mapToDto(savedEntity);
-    }
-    */
 
     @Override
     @Transactional(readOnly = true)
