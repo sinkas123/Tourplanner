@@ -2,7 +2,7 @@ package com.example.jpademo.service.impl;
 
 import com.example.jpademo.persistence.entities.TourEntity;
 import com.example.jpademo.persistence.entities.TourLogEntity;
-import com.example.jpademo.persistence.repositories.TourLogRepo;
+import com.example.jpademo.persistence.repositories.TourLogRepository;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourLogDto;
 import com.example.jpademo.service.mapper.TourLogMapper;
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class TourLogService {
 
-    private final TourLogRepo tourLogRepo;
+    private final TourLogRepository tourLogRepository;
     private final TourLogMapper tourLogMapper;
     private final TourRepository tourRepository;
 
-    public TourLogService(TourLogRepo tourLogRepo, TourLogMapper tourLogMapper, TourRepository tourRepository) {
-        this.tourLogRepo = tourLogRepo;
+    public TourLogService(TourLogRepository tourLogRepository, TourLogMapper tourLogMapper, TourRepository tourRepository) {
+        this.tourLogRepository = tourLogRepository;
         this.tourLogMapper = tourLogMapper;
         this.tourRepository = tourRepository;
     }
@@ -32,7 +32,7 @@ public class TourLogService {
     public TourLogDto createTourLog(TourLogDto tourLogDto) {
         TourLogEntity tourLogEntity = tourLogMapper.mapToEntity(tourLogDto);
 
-        TourLogEntity savedLog = tourLogRepo.save(tourLogEntity);
+        TourLogEntity savedLog = tourLogRepository.save(tourLogEntity);
         return tourLogMapper.mapToDto(savedLog);
     }
 
@@ -41,24 +41,24 @@ public class TourLogService {
     public List<TourLogDto> findAllLogsByTour(Long tourId) {
         TourEntity tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new RuntimeException("Tour not found: " + tourId));
-        return tourLogRepo.findByTourId(tour.getId()).stream()
+        return tourLogRepository.findByTourId(tour.getId()).stream()
                 .map(tourLogMapper::mapToDto)
                 .collect(Collectors.toList());
     }
     @Transactional
     public void deleteTourLog(Long id) {
-        tourLogRepo.deleteById(id);
+        tourLogRepository.deleteById(id);
         log.info("deletedTourLog: {}", id);
     }
 
     @Transactional
     public TourLogDto updateTourLog(Long id, TourLogDto tourLogDto) {
-        if(!tourLogRepo.existsById(id)) {
+        if(!tourLogRepository.existsById(id)) {
             throw new RuntimeException("TourLog not found: " + id);
         }
         TourLogEntity tourLogEntity = tourLogMapper.mapToEntity(tourLogDto);
         tourLogEntity.setId(id);
-        TourLogEntity updatedLog = tourLogRepo.save(tourLogEntity);
+        TourLogEntity updatedLog = tourLogRepository.save(tourLogEntity);
         log.info("updatedLog: #{} to {}", id, updatedLog);
         return tourLogMapper.mapToDto(updatedLog);
     }

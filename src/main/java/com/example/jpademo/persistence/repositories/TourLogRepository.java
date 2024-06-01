@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Repository
-    public interface TourLogRepo extends JpaRepository<TourLogEntity, Long> {
+    public interface TourLogRepository extends JpaRepository<TourLogEntity, Long> {
         List<TourLogEntity> findByTourId(Long tourId);
 
     }

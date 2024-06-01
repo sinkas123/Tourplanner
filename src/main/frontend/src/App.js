@@ -4,6 +4,7 @@ import TourForm from "./components/TourForm";
 import TourList from "./components/TourList";
 import TourDetails from "./components/TourDetails";
 import TourUpdate from "./components/TourUpdate";
+import LogList from "./components/LogList";
 
 const App = () => {
     const [tours, setTours] = useState([]);
@@ -11,6 +12,7 @@ const App = () => {
     const [selectedTourId, setSelectedTourId] = useState(null);
     const [creatingTour, setCreatingTour] = useState(false);
     const [editingTour, setEditingTour] = useState(false);
+    const [activeTab, setActiveTab] = useState('details');
 
     const handleCreateTour = (newTour) => {
         setTours([...tours, newTour]);
@@ -21,12 +23,14 @@ const App = () => {
         setSelectedTour(tour);
         setSelectedTourId(tour.id);
         setCreatingTour(false);
+        setActiveTab('details');
     };
 
     const handleCreateButtonClick = () => {
         setSelectedTour(null);
         setSelectedTourId(null);
         setCreatingTour(true);
+        setActiveTab('details');
     };
 
     const handleDeleteTour = (tourId) => {
@@ -54,9 +58,12 @@ const App = () => {
         displayComponent = <TourForm onCreateTour={handleCreateTour} />;
     } else if (editingTour) {
         displayComponent = <TourUpdate tour={selectedTour} onUpdateTour={handleUpdateTour} onCancel={handleCancelUpdate} />;
-    }
-    else if (selectedTour) {
-        displayComponent = <TourDetails tour={selectedTour} onDelete={() => handleDeleteTour(selectedTour.id)} onEdit={handleEditTour} />;
+    } else if (selectedTour) {
+        if (activeTab === 'details') {
+            displayComponent = <TourDetails tour={selectedTour} onDelete={() => handleDeleteTour(selectedTour.id)} onEdit={handleEditTour} />;
+        } else if (activeTab === 'logs') {
+            displayComponent = <LogList tourId={selectedTour.id} />;
+        }
     }
 
     return (
@@ -72,6 +79,10 @@ const App = () => {
                     />
                 </div>
                 <div className="display-component">
+                    <ul className="tab-list">
+                        <li className={activeTab === 'details' ? 'active' : ''} onClick={() => setActiveTab('details')}>Route Details</li>
+                        <li className={activeTab === 'logs' ? 'active' : ''} onClick={() => setActiveTab('logs')}>Tour Logs</li>
+                    </ul>
                     {displayComponent}
                 </div>
             </div>
