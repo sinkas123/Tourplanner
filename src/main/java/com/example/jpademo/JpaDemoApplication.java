@@ -14,8 +14,6 @@ import java.time.Duration;
 public class JpaDemoApplication {
 
     @Autowired
-    private PersonRepository personRepository;
-    @Autowired
     private TourRepository tourRepository;
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const LogList = ({ tourId }) => {
+const LogList = ({ tourId, onDelete, onDisplayLogForm }) => {
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -26,9 +26,19 @@ const LogList = ({ tourId }) => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
+    const onDeleteLog = async (id) => {
+        try {
+            await axios.delete(`/tour-logs/${id}`);
+        } catch (error) {
+            console.error("Error deleting the tour", error);
+        }
+    };
+
     return (
         <div>
-            <h2>Tour Logs</h2>
+            <h2>Tour Logs
+                <button onClick={onDisplayLogForm} style={{marginLeft: '10px'}}>Create Log</button>
+            </h2>
             <ul>
                 {logs.map((log) => (
                     <li key={log.id}>
@@ -38,6 +48,9 @@ const LogList = ({ tourId }) => {
                         <p>Total Distance: {log.totalDistance} m</p>
                         <p>Total Time: {log.totalTime}</p>
                         <p>Rating: {log.rating} / 10</p>
+                        <button style={{marginRight: '10px'}}>Placeholder Update Log</button>
+                        <button onClick={() => onDeleteLog(log.id)}>Delete Log</button>
+                        <br/>
                         <br/>
                     </li>
                 ))}

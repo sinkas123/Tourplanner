@@ -31,7 +31,7 @@ const TourDetails = ({ tour, onDelete, onEdit }) => {
             <p>Distance: {tour.tourDistance} m</p>
             <p>Estimated Time: {tour.estimatedTime} minutes</p>
             <button onClick={onEdit} style={{marginRight: '10px'}}>Update Tour</button>
-            <button onClick={onDeleteTour} style={{marginRight: '10px'}}>Delete Tour</button>
+            <button onClick={onDeleteTour}>Delete Tour</button>
             <br/>
             <button style={{marginRight: '10px', marginTop: '10px'}}>Placeholder Create Tour-Report</button>
             <button style={{marginTop: '10px'}}>Placeholder Create Summarize-Report</button>

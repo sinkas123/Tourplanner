@@ -77,7 +77,7 @@ const LogForm = ({ tourId }) => {
                 />
             </div>
             <div>
-                <label>Total Distance (in km):</label>
+                <label>Total Distance (in m):</label>
                 <input
                     type="number"
                     step="0.01"
