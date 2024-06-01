@@ -65,12 +65,15 @@ public class JpaDemoApplication {
         tourRepository.save(tour);
 
         // Example of adding a tour log
+        /*
         TourLogEntity tourLog = TourLogEntity.builder()
                 .details("Beautiful weather")
                 .timestamp(LocalDateTime.now())
                 .tour(tour)
                 .build();
         tourLogRepo.save(tourLog);
+
+         */
 
         System.out.println("Initialized tours and tour logs.");
     }

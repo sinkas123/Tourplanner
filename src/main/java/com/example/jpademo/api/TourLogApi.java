@@ -1,6 +1,7 @@
 package com.example.jpademo.api;
 import com.example.jpademo.service.dtos.TourLogDto;
 import com.example.jpademo.service.impl.TourLogService;
+import com.example.jpademo.service.mapper.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,13 @@ import java.util.List;
     @RequestMapping("/tour-logs")
     public class TourLogApi {
 
+        private final TourLogService tourLogService;
+
         @Autowired
-        private TourLogService tourLogService;
+        public TourLogApi(TourLogService tourLogService) {
+            this.tourLogService = tourLogService;
+        }
+
 
         @GetMapping("/{id}")
         public ResponseEntity<List<TourLogDto>> getLogsByTour(@PathVariable Long id) {

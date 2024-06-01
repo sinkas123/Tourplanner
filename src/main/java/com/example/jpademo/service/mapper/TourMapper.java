@@ -47,33 +47,4 @@ public class TourMapper extends AbstractMapper<TourEntity, TourDto> {
         entity.setRouteImagePath(source.getRouteImagePath());
         return entity;
     }
-
-    // Method to convert TourLogEntity to TourLogDto
-    public TourLogDto mapToTourLogDto(TourLogEntity source) {
-        if (source == null) {
-            return null;
-        }
-        return TourLogDto.builder()
-                .id(source.getId())
-                .details(source.getDetails())
-                .timestamp(source.getTimestamp())
-                .tourId(source.getTour().getId())  // Assuming the tour is not null
-                .build();
-    }
-
-    // Method to convert TourLogDto to TourLogEntity
-    public TourLogEntity mapToTourLogEntity(TourLogDto source, TourEntity tour) {
-        if (source == null) {
-            return null;
-        }
-        TourLogEntity entity = new TourLogEntity();
-        entity.setId(source.getId());
-        entity.setComment(source.getComment());
-        entity.setTimestamp(source.getTimestamp());
-        entity.setTour(tour);
-        return entity;
-    }
-
-
-
 }

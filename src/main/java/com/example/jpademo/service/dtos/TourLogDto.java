@@ -1,11 +1,12 @@
 package com.example.jpademo.service.dtos;
 
-import jakarta.persistence.Column;
+import com.example.jpademo.persistence.entities.TourEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,11 +17,11 @@ import java.time.LocalDateTime;
 
 public class TourLogDto {
     private Long id;
+    private LocalDateTime timestamp;
     private String comment;
     private Integer difficulty;
+    private Double totalDistance;
+    private Duration totalTime;
     private Integer rating;
-    private Integer totalDistance;
-    private LocalDateTime timestamp;
     private Long tourId;
-
 }

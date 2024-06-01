@@ -5,35 +5,35 @@ import com.example.jpademo.persistence.entities.TourLogEntity;
 import com.example.jpademo.persistence.repositories.TourLogRepo;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import com.example.jpademo.service.dtos.TourLogDto;
-import com.example.jpademo.service.mapper.TourMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.jpademo.service.mapper.TourLogMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+@Slf4j
 @Service
 public class TourLogService {
 
-    @Autowired
-    private TourLogRepo tourLogRepo;
-    @Autowired
-    private TourMapper tourMapper;
-    @Autowired
-    private TourRepository tourRepository;
+    private final TourLogRepo tourLogRepo;
+    private final TourLogMapper tourLogMapper;
+    private final TourRepository tourRepository;
 
+    public TourLogService(TourLogRepo tourLogRepo, TourLogMapper tourLogMapper, TourRepository tourRepository) {
+        this.tourLogRepo = tourLogRepo;
+        this.tourLogMapper = tourLogMapper;
+        this.tourRepository = tourRepository;
+    }
 
 
     @Transactional
     public TourLogDto createTourLog(TourLogDto tourLogDto) {
-        TourLogEntity tourLog = TourLogEntity.builder()
-                .comment(tourLogDto.getComment())
-                .timestamp(tourLogDto.getTimestamp())
-                .tour(tourRepository.getReferenceById(tourLogDto.getTourId()))  // Get reference proxy to TourEntity
-                .build();
+        TourLogEntity tourLogEntity = tourLogMapper.mapToEntity(tourLogDto);
 
-        TourLogEntity savedLog = tourLogRepo.save(tourLog);
-        return tourMapper.mapToTourLogDto(savedLog);
+        TourLogEntity savedLog = tourLogRepo.save(tourLogEntity);
+        return tourLogMapper.mapToDto(savedLog);
     }
 
 
@@ -41,31 +41,26 @@ public class TourLogService {
     public List<TourLogDto> findAllLogsByTour(Long tourId) {
         TourEntity tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new RuntimeException("Tour not found: " + tourId));
-        return tourLogRepo.findByTour(tour).stream()
-                .map(tourMapper::mapToTourLogDto)
+        return tourLogRepo.findByTourId(tour.getId()).stream()
+                .map(tourLogMapper::mapToDto)
                 .collect(Collectors.toList());
     }
     @Transactional
     public void deleteTourLog(Long id) {
         tourLogRepo.deleteById(id);
+        log.info("deletedTourLog: {}", id);
     }
 
     @Transactional
     public TourLogDto updateTourLog(Long id, TourLogDto tourLogDto) {
-        TourLogEntity log = tourLogRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tour log not found: " + id));
-
-        log.setDetails(tourLogDto.getDetails());
-        log.setTimestamp(tourLogDto.getTimestamp());
-
-        // Fetch the associated tour entity from the database
-        TourEntity tour = tourRepository.findById(tourLogDto.getTourId())
-                .orElseThrow(() -> new RuntimeException("Tour not found with id: " + tourLogDto.getTourId()));
-
-        log.setTour(tour);  // Set the fetched tour entity
-
-        tourLogRepo.save(log);  // Save the updated log
-        return tourMapper.mapToTourLogDto(log);  // Assuming you have a method to convert entity to DTO
+        if(!tourLogRepo.existsById(id)) {
+            throw new RuntimeException("TourLog not found: " + id);
+        }
+        TourLogEntity tourLogEntity = tourLogMapper.mapToEntity(tourLogDto);
+        tourLogEntity.setId(id);
+        TourLogEntity updatedLog = tourLogRepo.save(tourLogEntity);
+        log.info("updatedLog: #{} to {}", id, updatedLog);
+        return tourLogMapper.mapToDto(updatedLog);
     }
 
 

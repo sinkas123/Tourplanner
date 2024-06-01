@@ -10,8 +10,7 @@ import java.util.List;
 
 @Repository
     public interface TourLogRepo extends JpaRepository<TourLogEntity, Long> {
-        List<TourLogEntity> findByTour(TourEntity tour);
-
+        List<TourLogEntity> findByTourId(Long tourId);
 
     }
 

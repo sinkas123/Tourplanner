@@ -3,6 +3,7 @@ package com.example.jpademo.persistence.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,22 +18,24 @@ public class TourLogEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String comment;
+    private LocalDateTime timestamp;
 
     @Column(nullable = false)
-    private LocalDateTime timestamp;
+    private String comment;
 
     @Column(nullable = false)
     private Integer difficulty;
 
     @Column(nullable = false)
-    private Integer totalDistance;
+    private Double totalDistance;
+
+    @Column(nullable = false)
+    private Duration totalTime;
 
     @Column(nullable = false)
     private Integer rating;
 
-    @ManyToOne
-    @JoinColumn(name = "tour_id", nullable = false)
-    private TourEntity tour; // Assuming each log is linked to a specific tour
-}
+    @Column(name = "fk_tour_id", nullable = false)
+    private Long tourId;
+ }
 

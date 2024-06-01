@@ -15,7 +15,6 @@ CREATE TABLE tour (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TABLE tour_log (
     id SERIAL PRIMARY KEY,
     tour_id INTEGER NOT NULL REFERENCES tour(id),
@@ -37,6 +36,7 @@ CREATE TABLE address (
     fk_person BIGINT,
     FOREIGN KEY (fk_person) REFERENCES person(id) ON DELETE CASCADE
 );
+
 CREATE TABLE person (
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
