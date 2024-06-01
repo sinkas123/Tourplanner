@@ -1,6 +1,5 @@
 package com.example.jpademo.service.dtos;
 
-import com.example.jpademo.persistence.entities.TourEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

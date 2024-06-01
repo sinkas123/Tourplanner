@@ -1,12 +1,7 @@
 package com.example.jpademo.service.mapper;
 
-import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.entities.TourEntity;
-import com.example.jpademo.persistence.entities.TourLogEntity;
-import com.example.jpademo.service.dtos.PersonDto;
 import com.example.jpademo.service.dtos.TourDto;
-import com.example.jpademo.service.dtos.TourLogDto;
-import lombok.Builder;
 import org.springframework.stereotype.Component;
 
 

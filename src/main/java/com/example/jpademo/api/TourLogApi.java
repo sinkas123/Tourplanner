@@ -1,7 +1,6 @@
 package com.example.jpademo.api;
 import com.example.jpademo.service.dtos.TourLogDto;
 import com.example.jpademo.service.impl.TourLogService;
-import com.example.jpademo.service.mapper.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

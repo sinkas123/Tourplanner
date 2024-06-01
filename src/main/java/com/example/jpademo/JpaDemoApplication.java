@@ -2,7 +2,6 @@ package com.example.jpademo;
 
 import com.example.jpademo.persistence.entities.PersonEntity;
 import com.example.jpademo.persistence.entities.TourEntity;
-import com.example.jpademo.persistence.entities.TourLogEntity;
 import com.example.jpademo.persistence.repositories.PersonRepository;
 import com.example.jpademo.persistence.repositories.TourLogRepo;
 import com.example.jpademo.persistence.repositories.TourRepository;
@@ -10,10 +9,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class JpaDemoApplication {
