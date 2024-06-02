@@ -1,7 +1,6 @@
 package com.example.jpademo;
 
 import com.example.jpademo.persistence.entities.TourEntity;
-import com.example.jpademo.persistence.repositories.PersonRepository;
 import com.example.jpademo.persistence.repositories.TourRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,12 @@ public class JpaDemoApplication {
     public void initTourData() {
         // Assuming you have repositories and builders set up for Tours and LogList
         TourEntity tour = TourEntity.builder()
-                .name("Vienna City Tour")
+                .name("FH-Tour")
                 .description("Explore historic Vienna")
-                .startLocation("Vienna")
-                .endLocation("Vienna")
-                .transportType("Bus")
-                .tourDistance(15.0)
+                .startLocation("Austria, Vienna, Höchstädtplatz 8")
+                .endLocation("Austria, Vienna, Dresdner Straße 100")
+                .transportType("foot-walking")
+                .tourDistance(100.0)
                 .estimatedTime(Duration.ofHours(3))
                 .build();
         tourRepository.save(tour);

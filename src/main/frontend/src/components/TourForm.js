@@ -29,6 +29,8 @@ const TourForm = () => {
             tourDistance: 0,
             estimatedTime: 0,
             routeImagePath: '/images/default.png',
+            popularity: 0,
+            childFriendliness: 0
         };
 
         try {

@@ -15,6 +15,28 @@ const TourDetails = ({ tour, onDelete, onEdit }) => {
         }
     };
 
+    const getPopularityString = (popularity) => {
+        const popularityMap = [
+            "unpopular",
+            "slightly popular",
+            "moderately popular",
+            "popular",
+            "very popular"
+        ];
+        return popularityMap[popularity];
+    };
+
+    const getChildFriendlinessString = (childFriendliness) => {
+        const childFriendlinessMap = [
+            "not child-friendly",
+            "not very child-friendly",
+            "ok",
+            "child-friendly",
+            "very child-friendly"
+        ];
+        return childFriendlinessMap[childFriendliness];
+    }
+
     return (
         <div>
             <h3>{tour.name}</h3>
@@ -30,6 +52,8 @@ const TourDetails = ({ tour, onDelete, onEdit }) => {
             <p>Transport Type: {tour.transportType}</p>
             <p>Distance: {tour.tourDistance} m</p>
             <p>Estimated Time: {tour.estimatedTime} minutes</p>
+            <p>Popularity: {getPopularityString(tour.popularity)}</p>
+            <p>Child Friendliness: {getChildFriendlinessString(tour.childFriendliness)}</p>
             <button onClick={onEdit} style={{marginRight: '10px'}}>Update Tour</button>
             <button onClick={onDeleteTour}>Delete Tour</button>
             <br/>
