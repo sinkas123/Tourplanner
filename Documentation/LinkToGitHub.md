@@ -1,1 +1,1 @@
-https://github.com/sinkas123/Tourplanner.git
+https://github.com/sinkas123/Tourplanner/tree/main
