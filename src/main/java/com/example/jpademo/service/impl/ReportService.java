@@ -30,7 +30,7 @@ public class ReportService {
     }
 
 
-    public void createTourReport(String target, TourDto tour, java.util.List<TourLogDto> logs) throws IOException {
+    public String createTourReport(String target, TourDto tour, java.util.List<TourLogDto> logs) throws IOException {
         String basePath = getClass().getClassLoader().getResource("").getPath(); // Get base path of resources
         System.out.println(basePath);
         String completeTarget = basePath + "../../src/main/java/com/example/jpademo/persistence/report_files/" + target;
@@ -80,11 +80,11 @@ public class ReportService {
         }
         document.add(table);
         document.close();
+        return completeTarget;
     }
 
-    public void createSummaryReport(String target) throws IOException {
+    public String createSummaryReport(String target) throws IOException {
         String basePath = getClass().getClassLoader().getResource("").getPath(); // Get base path of resources
-        System.out.println(basePath);
         String completeTarget = basePath + "../../src/main/java/com/example/jpademo/persistence/report_files/" + target;
         PdfWriter writer = new PdfWriter(completeTarget);
         PdfDocument pdf = new PdfDocument(writer);
@@ -120,6 +120,7 @@ public class ReportService {
             table.setFontSize(14).setBackgroundColor(ColorConstants.WHITE);
         }
         document.close();
+        return completeTarget;
     }
 
     private Duration calculateAverageTime(Long tourId){
@@ -170,18 +171,4 @@ public class ReportService {
 
         return sum / logs.size();
     }
-
-    /*
-    public static boolean createTest() throws IOException {
-        PdfWriter writer = new PdfWriter("test.pdf");
-        PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
-
-        Paragraph paragraph = new Paragraph("This is a test");
-        document.add(paragraph);
-        document.close();
-
-        return true;
-    }
-     */
 }

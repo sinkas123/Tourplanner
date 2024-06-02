@@ -15,6 +15,40 @@ const TourDetails = ({ tour, onDelete, onEdit }) => {
         }
     };
 
+    const onCreateTourReport = async () => {
+        const response = await axios.get(`/report/tour/${tour.id}`, {
+            responseType: 'blob',
+            params: {
+                target: "Tour" + tour.id + "_tourReport.pdf"
+            },
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'tourReport.pdf');
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+    };
+
+    const onCreateSummaryReport = async () => {
+        const response = await axios.get(`/report/summary`, {
+            responseType: 'blob',
+            params: {
+                target: "Tour" + tour.id + "_summaryReport.pdf"
+            },
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'tourReport.pdf');
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+    };
+
     const getPopularityString = (popularity) => {
         const popularityMap = [
             "unpopular",
@@ -57,8 +91,8 @@ const TourDetails = ({ tour, onDelete, onEdit }) => {
             <button onClick={onEdit} style={{marginRight: '10px'}}>Update Tour</button>
             <button onClick={onDeleteTour}>Delete Tour</button>
             <br/>
-            <button style={{marginRight: '10px', marginTop: '10px'}}>Placeholder Create Tour-Report</button>
-            <button style={{marginTop: '10px'}}>Placeholder Create Summarize-Report</button>
+            <button onClick={onCreateTourReport} style={{marginRight: '10px', marginTop: '10px'}}>Create Tour-Report</button>
+            <button onClick={onCreateSummaryReport} style={{marginTop: '10px'}}>Create Summarize-Report</button>
         </div>
     );
 };
