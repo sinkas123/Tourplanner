@@ -1,0 +1,709 @@
+{
+	"info": {
+		"_postman_id": "d0d651e1-9402-40ec-bb81-3478a4bbb090",
+		"name": "TourPlanner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33297852"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "postPerson1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test\",\n  \"email\": \"test@test.com\",\n  \"age\": 69\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postPerson2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"age\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tour",
+			"item": [
+				{
+					"name": "postTour1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"testtour\",\n  \"description\": \"Wandern und Bergsteigen\",\n  \"startLocation\": \"Austria, 1200 Wien, Dresdner Straße 100\",\n  \"endLocation\": \"Austria, 1200 Wien, Höchstädtplatz 1\",\n  \"transportType\": \"foot-walking\",\n  \"tourDistance\": 0,\n  \"estimatedTime\": 0,\n  \"routeImagePath\": \"/images/mountain.png\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postTour2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Radweg\",\n  \"description\": \"Radfahren\",\n  \"startLocation\": \"Start\",\n  \"endLocation\": \"Ziel\",\n  \"transportType\": \"Rad\",\n  \"tourDistance\": 20,\n  \"estimatedTime\": \"PT5H\",\n  \"routeImagePath\": \"/images/bike.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTours",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putTour",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Wanderweg_update\",\n  \"description\": \"Wandern und Bergsteigen_update\",\n  \"startLocation\": \"Start\",\n  \"endLocation\": \"Gipfel\",\n  \"transportType\": \"Fussexpress\",\n  \"tourDistance\": 9,\n  \"estimatedTime\": \"PT3H\",\n  \"routeImagePath\": \"/images/mountain_update.png\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour/id/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTour1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour/id/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTour1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour/id/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTours Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TourLog",
+			"item": [
+				{
+					"name": "postTourLog1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-05-31T12:34:56\",\n  \"comment\": \"test6\",\n  \"difficulty\": 3,\n  \"totalDistance\": 550,\n  \"totalTime\": \"PT2M\",\n  \"rating\": 5,\n  \"tourId\": 2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour-logs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postTourLog2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-05-31T12:34:56\",\n  \"comment\": \"war gute!\",\n  \"difficulty\": 1,\n  \"totalDistance\": 11.5,\n  \"totalTime\": \"PT2H30M\",\n  \"rating\": 8,\n  \"tourId\": 11\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour-logs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTourLogsOfTour 1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour-logs/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour-logs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putTourLog1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-05-31T12:34:56\",\n  \"comment\": \"Updated Tour!\",\n  \"difficulty\": 4,\n  \"totalDistance\": 155,\n  \"totalTime\": \"PT2H30M\",\n  \"rating\": 1,\n  \"tourId\": 12\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour-logs/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour-logs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTourLogsOfTour 12 Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-05-31T12:34:56\",\n  \"comment\": \"Great tour with amazing views!\",\n  \"difficulty\": 3,\n  \"totalDistance\": 15.5,\n  \"totalTime\": \"PT2H30M\",\n  \"rating\": 5,\n  \"tourId\": 12\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour-logs/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour-logs",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTourLog1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tour-logs/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tour-logs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "getTourReport",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/report/tour/2?target=testreport.pdf",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"tour",
+								"2"
+							],
+							"query": [
+								{
+									"key": "target",
+									"value": "testreport.pdf"
+								},
+								{
+									"key": "tourId",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSummaryReport",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/report/summary?target=testsummaryreport.pdf",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "tourId",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "target",
+									"value": "testsummaryreport.pdf"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Streetmap",
+			"item": [
+				{
+					"name": "https://tile.openstreetmap.org/17/71498/45431.png",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tile.openstreetmap.org/17/71498/45431.png",
+							"protocol": "https",
+							"host": [
+								"tile",
+								"openstreetmap",
+								"org"
+							],
+							"path": [
+								"17",
+								"71498",
+								"45431.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streetmap_search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624846203adf1286454dbbb676c6f68ec13d&text=Austria, 1200 Wien, Höchstädtplatz 6",
+							"protocol": "https",
+							"host": [
+								"api",
+								"openrouteservice",
+								"org"
+							],
+							"path": [
+								"geocode",
+								"search"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "5b3ce3597851110001cf624846203adf1286454dbbb676c6f68ec13d"
+								},
+								{
+									"key": "text",
+									"value": "Austria, 1200 Wien, Höchstädtplatz 6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search_java_Höchst",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/address/search/Austria, 1200 Wien, Höchstädtplatz 1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address",
+								"search",
+								"Austria, 1200 Wien, Höchstädtplatz 1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search_java_Eugen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/address/search/Austria, 1040 Wien, Prinz-Eugen-Straße 18",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address",
+								"search",
+								"Austria, 1040 Wien, Prinz-Eugen-Straße 18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Direction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=5b3ce3597851110001cf624846203adf1286454dbbb676c6f68ec13d&start=16.378317,48.238992&end=16.376495,48.239378",
+							"protocol": "https",
+							"host": [
+								"api",
+								"openrouteservice",
+								"org"
+							],
+							"path": [
+								"v2",
+								"directions",
+								"foot-walking"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "5b3ce3597851110001cf624846203adf1286454dbbb676c6f68ec13d"
+								},
+								{
+									"key": "start",
+									"value": "16.378317,48.238992"
+								},
+								{
+									"key": "end",
+									"value": "16.376495,48.239378"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

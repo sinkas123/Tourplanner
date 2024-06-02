@@ -29,12 +29,6 @@ class JpaDemoApplicationTests {
     void contextLoads() {
     }
 
-   /* @BeforeEach
-    public void cleanUp() {
-        addressRepository.deleteAllInBatch();
-        personRepository.deleteAllInBatch();
-    }*/
-
 // ... your test methods ...
 
     @Test
@@ -150,12 +144,7 @@ class JpaDemoApplicationTests {
                 .person(anna)
                 .build());
 
-       /* Collection<AddressEntity> addresses = new ArrayList<>();
-        addresses.add(graben);
-        addresses.add(kellergasse);
-        anna.setAddresses(addresses);
 
-*/
         personRepository.findAll().forEach(System.out::println);
 
         addressRepository.findAll().forEach(System.out::println);
@@ -163,6 +152,8 @@ class JpaDemoApplicationTests {
         System.out.println("find addresses by person:");
         addressRepository.findByPerson(anna).forEach(System.out::println);
     }
+
+
 
 
 }
