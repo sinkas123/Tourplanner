@@ -16,7 +16,7 @@ import java.util.List;
 public class ReportApi {
 
     @Autowired
-    private final ReportService reportService = new ReportService();
+    private ReportService reportService;
     @Autowired
     private TourServiceImpl tourServiceImpl;
     @Autowired
@@ -30,4 +30,12 @@ public class ReportApi {
         reportService.createTourReport(target, tour, logs);
             return true;
     }
+
+    @GetMapping("/summary")
+    public String getSummary(@RequestParam String target) throws IOException {
+        reportService.createSummaryReport(target);
+        return target;
+    }
+
+
 }
