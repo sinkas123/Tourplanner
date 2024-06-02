@@ -6,6 +6,7 @@ import TourDetails from "./components/TourDetails";
 import TourUpdate from "./components/TourUpdate";
 import LogList from "./components/LogList";
 import LogForm from "./components/LogForm";
+import LogUpdate from "./components/LogUpdate";
 
 const App = () => {
     const [tours, setTours] = useState([]);
@@ -15,6 +16,9 @@ const App = () => {
     const [editingTour, setEditingTour] = useState(false);
     const [activeTab, setActiveTab] = useState('details');
     const [displayLogForm, setDisplayLogForm] = useState(false);
+    const [editingLog, setEditingLog] = useState(false);
+    const [selectedLog, setSelectedLog] = useState(null);
+    const [logs, setLogs] = useState([]);
 
     const handleCreateTour = (newTour) => {
         setTours([...tours, newTour]);
@@ -57,11 +61,23 @@ const App = () => {
 
     const handleCreateLogButtonClick = () => {
         setDisplayLogForm(true);
-    }
-
-    const handleCreateLog = () => {
-        setDisplayLogForm(true);
     };
+
+    const handleEditLog = (log) => {
+        setEditingLog(true);
+        setSelectedLog(log);
+    };
+
+    const handleCancelUpdateLog = () => {
+        setEditingLog(false);
+        setSelectedLog(null);
+    };
+
+    const handleUpdateLog = (updatedLog) => {
+        setLogs(logs.map(log => (log.id === updatedLog.id ? updatedLog : log)));
+        setEditingLog(false);
+        setSelectedLog(null);
+    }
 
     let displayComponent;
     if (creatingTour) {
@@ -74,9 +90,11 @@ const App = () => {
         } else if (activeTab === 'logs') {
             if(displayLogForm){
                 displayComponent = <LogForm tourId={selectedTour.id} />
+            } else if(editingLog && selectedLog){
+                displayComponent = <LogUpdate log={selectedLog} onCancelLog={handleCancelUpdateLog} onUpdateLog={handleUpdateLog}/>
             }
             else{
-                displayComponent = <LogList tourId={selectedTour.id} onDisplayLogForm={handleCreateLogButtonClick} />;
+                displayComponent = <LogList tourId={selectedTour.id} onDisplayLogForm={handleCreateLogButtonClick} onEditLog={handleEditLog} />;
             }
         }
     }

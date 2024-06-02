@@ -54,7 +54,7 @@ const TourUpdate = ({ tour, onUpdateTour, onCancel }) => {
                         <option value="foot-walking">Foot Walking</option>
                     </select>
                 </div>
-                <button type="submit">Update Tour</button>
+                <button type="submit" style={{marginRight: '10px'}}>Update Tour</button>
                 <button type="button" onClick={onCancel}>Cancel</button>
             </form>
         </div>

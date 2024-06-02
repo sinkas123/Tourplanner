@@ -31,7 +31,7 @@ const TourList = ({ onSelectTour, onCreateTour }) => {
 
     return (
         <div>
-            <h2>Tours List
+            <h2>Tour List
                 <button onClick={onCreateTour} style={{ marginLeft: '10px' }}>Create Tour</button>
             </h2>
             <input
