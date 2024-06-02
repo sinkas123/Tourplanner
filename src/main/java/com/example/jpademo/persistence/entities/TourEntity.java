@@ -42,5 +42,10 @@ public class TourEntity {
     @Column(name = "route_image_path")
     private String routeImagePath;
 
+    @Column(name = "popularity")
+    private int popularity;
+
+    @Column(name = "child_friendliness")
+    private int childFriendliness;
 
 }

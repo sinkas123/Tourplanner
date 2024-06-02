@@ -20,19 +20,25 @@ public class TourLogService {
     private final TourLogRepository tourLogRepository;
     private final TourLogMapper tourLogMapper;
     private final TourRepository tourRepository;
+    private final TourServiceImpl tourServiceImpl;
 
-    public TourLogService(TourLogRepository tourLogRepository, TourLogMapper tourLogMapper, TourRepository tourRepository) {
+    public TourLogService(TourLogRepository tourLogRepository, TourLogMapper tourLogMapper, TourRepository tourRepository, TourServiceImpl tourServiceImpl) {
         this.tourLogRepository = tourLogRepository;
         this.tourLogMapper = tourLogMapper;
         this.tourRepository = tourRepository;
+        this.tourServiceImpl = tourServiceImpl;
     }
 
 
     @Transactional
     public TourLogDto createTourLog(TourLogDto tourLogDto) {
         TourLogEntity tourLogEntity = tourLogMapper.mapToEntity(tourLogDto);
-
         TourLogEntity savedLog = tourLogRepository.save(tourLogEntity);
+
+        List<TourLogDto> logs = findAllLogsByTour(savedLog.getTourId());
+
+        tourServiceImpl.updateTourAttributes(logs);
+
         return tourLogMapper.mapToDto(savedLog);
     }
 

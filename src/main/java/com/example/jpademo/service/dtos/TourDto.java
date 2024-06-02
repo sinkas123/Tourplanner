@@ -23,4 +23,6 @@ public class TourDto {
     private Double tourDistance;
     private Duration estimatedTime;
     private String routeImagePath;
+    private int popularity;
+    private int childFriendliness;
 }

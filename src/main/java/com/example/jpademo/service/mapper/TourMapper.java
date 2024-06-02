@@ -23,6 +23,8 @@ public class TourMapper extends AbstractMapper<TourEntity, TourDto> {
                 .tourDistance(source.getTourDistance())
                 .estimatedTime(source.getEstimatedTime())
                 .routeImagePath(source.getRouteImagePath())
+                .popularity(source.getPopularity())
+                .childFriendliness(source.getChildFriendliness())
                 .build();
     }
 
@@ -40,6 +42,8 @@ public class TourMapper extends AbstractMapper<TourEntity, TourDto> {
         entity.setTourDistance(source.getTourDistance());
         entity.setEstimatedTime(source.getEstimatedTime());
         entity.setRouteImagePath(source.getRouteImagePath());
+        entity.setPopularity(source.getPopularity());
+        entity.setChildFriendliness(source.getChildFriendliness());
         return entity;
     }
 }
